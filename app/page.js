@@ -44,6 +44,42 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
+      {/* Language Toggle */}
+      <div style={{
+        position: "fixed",
+        top: 20,
+        right: 24,
+        zIndex: 9999,
+        display: "flex",
+        alignItems: "center",
+        background: "#ffffff",
+        border: "1px solid #e2e8f0",
+        borderRadius: 40,
+        padding: 3,
+        boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+      }}>
+        <a href="/" style={{
+          padding: "6px 16px",
+          borderRadius: 40,
+          fontSize: 13,
+          fontWeight: 600,
+          letterSpacing: "0.02em",
+          textDecoration: "none",
+          background: "#0f172a",
+          color: "#ffffff",
+        }}>EN</a>
+        <a href="/ko" style={{
+          padding: "6px 16px",
+          borderRadius: 40,
+          fontSize: 13,
+          fontWeight: 600,
+          letterSpacing: "0.02em",
+          textDecoration: "none",
+          color: "#94a3b8",
+          background: "transparent",
+        }}>KO</a>
+      </div>
+
       <nav className="border-b border-slate-100">
         <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="font-semibold text-lg tracking-tight">Darilian</div>
