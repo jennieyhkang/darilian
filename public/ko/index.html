@@ -1,1 +1,754 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darilian — 미국 기업과 아시아-태평양 엔지니어를 연결합니다</title>
+    <meta name="description" content="비자 없이, 완전 원격으로. 한국 최고의 엔지니어를 미국 기업에 연결하는 매니지드 스태핑 플랫폼.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a26;
+            --text-primary: #f0efe9;
+            --text-secondary: #9d9b93;
+            --text-muted: #6b6960;
+            --accent: #c8f065;
+            --accent-dim: #a3c44e;
+            --accent-glow: rgba(200, 240, 101, 0.12);
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --font-ko: 'Noto Sans KR', sans-serif;
+            --font-en: 'DM Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-ko);
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ── LANGUAGE TOGGLE ── */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 3px;
+            backdrop-filter: blur(20px);
+        }
+
+        .lang-toggle a {
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-family: var(--font-en);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.25s ease;
+        }
+
+        .lang-toggle a.active {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .lang-toggle a:not(.active):hover {
+            color: var(--text-primary);
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10,10,15,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: var(--font-en);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-cta {
+            font-family: var(--font-ko);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 40px;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-right: 100px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 24px 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(200,240,101,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            max-width: 720px;
+            margin-bottom: 24px;
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 540px;
+            line-height: 1.8;
+            margin-bottom: 44px;
+            animation: fadeUp 0.8s ease 0.2s both;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: var(--font-ko);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: fadeUp 0.8s ease 0.3s both;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-glow);
+        }
+
+        .hero-cta svg {
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(3px);
+        }
+
+        .hero-countries {
+            margin-top: 60px;
+            font-size: 15px;
+            color: var(--text-muted);
+            animation: fadeUp 0.8s ease 0.4s both;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 100px 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 56px;
+        }
+
+        /* ── PROBLEM ── */
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(200,240,101,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .problem-stat {
+            font-family: var(--font-en);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .problem-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .problem-card p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ── PROCESS ── */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 64px;
+        }
+
+        .process-step {
+            background: var(--bg-card);
+            padding: 36px 24px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .process-step:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .process-num {
+            font-family: var(--font-en);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .process-step h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── FEATURES ── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ── BENEFITS LIST ── */
+        .benefits-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 56px 48px;
+        }
+
+        .benefits-section h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            display: grid;
+            gap: 18px;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .benefits-list li .check {
+            color: var(--accent);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ── WAITLIST FORM ── */
+        .waitlist-section {
+            text-align: center;
+            padding: 100px 24px 120px;
+        }
+
+        .waitlist-form {
+            max-width: 440px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .waitlist-form input,
+        .waitlist-form select {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: var(--font-ko);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .waitlist-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .waitlist-form input:focus,
+        .waitlist-form select:focus {
+            border-color: var(--accent);
+        }
+
+        .waitlist-form select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%236b6960' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+        }
+
+        .waitlist-form select option {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .waitlist-btn {
+            padding: 16px 36px;
+            border-radius: 50px;
+            border: none;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: var(--font-ko);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .waitlist-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-glow);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-cta { margin-right: 80px; }
+            .lang-toggle { top: 16px; right: 16px; }
+            .lang-toggle a { padding: 5px 12px; font-size: 12px; }
+
+            .hero { padding: 120px 20px 60px; }
+
+            section { padding: 64px 20px; }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-card { padding: 32px 24px; }
+            .benefits-section { padding: 36px 28px; }
+        }
+
+        @media (max-width: 480px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-cta { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <a href="/">EN</a>
+        <a href="/ko" class="active">KO</a>
+    </div>
+
+    <!-- Nav -->
+    <nav>
+        <div class="nav-logo">Darilian</div>
+        <a href="#waitlist" class="nav-cta">웨이트리스트 등록 →</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            2026년 런칭 · 웨이트리스트 오픈
+        </div>
+        <h1>
+            한국 최고의 엔지니어,<br>
+            <span class="highlight">미국 기업</span>에서 일하다.
+        </h1>
+        <p>
+            비자 없이, 완전 원격으로.<br>
+            채용부터 계약, 급여까지 — Darilian이 모두 관리합니다.
+        </p>
+        <a href="#waitlist" class="hero-cta">
+            웨이트리스트 등록하기
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="hero-countries">
+            🇰🇷 한국 · 🇹🇼 대만 · 🇮🇳 인도 · 🇨🇳 중국 · 🇭🇰 홍콩 · 🇻🇳 베트남
+        </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="fade-in">
+        <div class="section-label">문제</div>
+        <h2 class="section-title">실력은 있는데, 기회가 없다.</h2>
+        <p class="section-desc">
+            수백만 명의 아시아-태평양 엔지니어가 미국 기업에서 원격으로 일할 준비가 되어 있습니다. 하지만 연결해주는 플랫폼이 없었습니다.
+        </p>
+
+        <div class="problem-card">
+            <div class="problem-stat">700,000+</div>
+            <h3>미국 내 미충원 기술 직군 수</h3>
+            <p>매년 수십만 개의 엔지니어링 포지션이 채워지지 않고 있습니다. 비자 백로그와 채용 파이프라인 고갈로 미국 기업들은 해외 인재를 필요로 합니다.</p>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-stat">0</div>
+            <h3>한국 엔지니어를 위한 전용 플랫폼</h3>
+            <p>뛰어난 기술력과 영어 실력을 갖춘 한국 엔지니어가 미국 기업과 직접 연결될 수 있는 매니지드 플랫폼은 지금까지 없었습니다.</p>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="fade-in">
+        <div class="section-label">프로세스</div>
+        <h2 class="section-title">간단한 4단계</h2>
+        <p class="section-desc">
+            지원부터 근무 시작까지, Darilian이 모든 과정을 함께합니다.
+        </p>
+
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="process-num">01</div>
+                <h4>프로필 등록</h4>
+                <p>무료로 프로필을 작성하고 기술 역량을 검증받으세요.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">02</div>
+                <h4>Darilian 심사</h4>
+                <p>기술 평가, 영어 능력, 비동기 커뮤니케이션 역량을 검증합니다.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">03</div>
+                <h4>기업 매칭</h4>
+                <p>미국 기업이 프로필을 검토하고 인터뷰를 진행합니다.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-num">04</div>
+                <h4>원격 근무 시작</h4>
+                <p>비자 없이 원격으로 근무를 시작합니다. 계약·급여·복리후생 모두 처리됩니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="fade-in">
+        <div class="section-label">Darilian의 차별점</div>
+        <h2 class="section-title">모든 것을 관리합니다.</h2>
+        <p class="section-desc">
+            채용 매칭부터 급여 지급까지 — 엔지니어는 일에만 집중하세요.
+        </p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h4>매니지드 스태핑</h4>
+                <p>소싱, 심사, 배치까지 모든 과정을 Darilian이 직접 관리합니다. 스크리닝부터 페이롤, EOR 컴플라이언스까지.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h4>철저한 검증</h4>
+                <p>기술 평가, 영어 능력 테스트, 비동기 커뮤니케이션 점수 — 기업에 전달되기 전 모든 역량이 검증됩니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌏</div>
+                <h4>100% 원격</h4>
+                <p>비자 불필요. 6개국 현지 노동법을 준수하는 EOR(Employer of Record) 기반 완전 원격 근무.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h4>급여 100% 보장</h4>
+                <p>Darilian 수수료는 고용 기업이 부담합니다. 엔지니어는 급여의 100%를 그대로 수령합니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h4>전담 커리어 어드바이저</h4>
+                <p>합격 시 전담 커리어 어드바이저가 배정됩니다. 인터뷰 준비부터 연봉 협상까지 지원합니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h4>계약·급여·복리후생</h4>
+                <p>고용 계약, 급여 지급, 세금 처리, 복리후생까지 — 행정 업무는 Darilian이 모두 처리합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="fade-in">
+        <div class="benefits-section">
+            <h3>🇰🇷 한국 엔지니어를 위한 혜택</h3>
+            <ul class="benefits-list">
+                <li><span class="check">✓</span> 무료 프로필 생성 및 역량 검증</li>
+                <li><span class="check">✓</span> 합격 시 전담 커리어 어드바이저 배정</li>
+                <li><span class="check">✓</span> 직접 지원할 필요 없이 — 매칭된 포지션에 연결</li>
+                <li><span class="check">✓</span> 인터뷰 준비 및 연봉 협상 지원</li>
+                <li><span class="check">✓</span> 고용 계약, 급여, 복리후생 — 모두 처리</li>
+                <li><span class="check">✓</span> 급여 100% 수령 — 수수료는 고용 기업 부담</li>
+                <li><span class="check">✓</span> 비자 없이 한국에서 미국 기업과 원격 근무</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section class="waitlist-section fade-in" id="waitlist">
+        <div class="section-label">웨이트리스트</div>
+        <h2 class="section-title">가장 먼저 시작하세요.</h2>
+        <p class="section-desc" style="margin-left:auto;margin-right:auto;">
+            런칭 시 우선 접근 기회를 드립니다.<br>웨이트리스트에 등록하고 기다려주세요.
+        </p>
+
+        <form class="waitlist-form" action="#" method="POST">
+            <input type="text" name="name" placeholder="이름" required>
+            <input type="email" name="email" placeholder="이메일" required>
+            <select name="country" required>
+                <option value="" disabled selected>국가 선택</option>
+                <option value="KR" selected>🇰🇷 한국</option>
+                <option value="TW">🇹🇼 대만</option>
+                <option value="IN">🇮🇳 인도</option>
+                <option value="CN">🇨🇳 중국</option>
+                <option value="HK">🇭🇰 홍콩</option>
+                <option value="VN">🇻🇳 베트남</option>
+                <option value="other">기타</option>
+            </select>
+            <input type="hidden" name="role" value="engineer">
+            <button type="submit" class="waitlist-btn">웨이트리스트 등록</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Darilian. All rights reserved. · <a href="mailto:hello@darilian.com">hello@darilian.com</a></p>
+    </footer>
+
+    <!-- Scroll Animations -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
 
