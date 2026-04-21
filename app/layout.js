@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,10 +20,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-          <script defer src="https://cloud.umami.is/script.js" data-website-id="5ce45832-ed11-4cec-9ae3-ca0b70244a4b"></script>
-        </head>
-        <body className={inter.className}>
-          {children}
-        </body>
-      </html>
+      <body className={inter.className}>
+        {children}
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="5ce45832-ed11-4cec-9ae3-ca0b70244a4b"
+          strategy="afterInteractive"
+        />
+      </body>
+    </html>
+  );
+}
